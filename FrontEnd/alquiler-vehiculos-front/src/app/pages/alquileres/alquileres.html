@@ -1,0 +1,159 @@
+<div class="contenedor">
+  <h1>Gestión de Alquileres</h1>
+
+  <div class="tarjeta formulario">
+    <h2>{{ modoEditar ? 'Editar Alquiler' : 'Registrar Alquiler' }}</h2>
+
+    <form (ngSubmit)="guardarAlquiler()">
+
+      <div class="grupo">
+        <label>Cliente</label>
+        <select [(ngModel)]="alquiler.clienteId" name="clienteId">
+          <option [ngValue]="0">Seleccione un cliente</option>
+          <option *ngFor="let c of clientes" [ngValue]="c.clienteId">
+            {{ c.nombre }} {{ c.apellido }} - {{ c.licencia }}
+          </option>
+        </select>
+      </div>
+
+      <div class="grupo">
+        <label>Vehículo</label>
+        <select 
+          [(ngModel)]="alquiler.vehiculoId" 
+          name="vehiculoId"
+          [disabled]="modoEditar"
+        >
+          <option [ngValue]="0">Seleccione un vehículo</option>
+          <option 
+            *ngFor="let v of vehiculos" 
+            [ngValue]="v.vehiculoId" 
+            [disabled]="!v.disponible && v.vehiculoId !== alquiler.vehiculoId"
+          >
+            {{ v.marca }} {{ v.modelo }} - {{ v.anio }}
+            {{ v.disponible ? '' : '(No disponible)' }}
+          </option>
+        </select>
+
+        <small *ngIf="modoEditar">
+          El vehículo no se cambia al editar para evitar conflictos de disponibilidad.
+        </small>
+      </div>
+
+      <div class="grupo">
+        <label>Fecha de inicio</label>
+        <input type="date" [(ngModel)]="alquiler.fechaInicio" name="fechaInicio">
+      </div>
+
+      <div class="grupo">
+        <label>Fecha de fin</label>
+        <input type="date" [(ngModel)]="alquiler.fechaFin" name="fechaFin">
+      </div>
+
+      <div class="grupo">
+        <label>Precio total</label>
+        <input 
+          type="number" 
+          [(ngModel)]="alquiler.precioTotal" 
+          name="precioTotal" 
+          min="1" 
+          placeholder="Ej: 150"
+        >
+      </div>
+
+      <div class="grupo" *ngIf="modoEditar">
+        <label>Estado</label>
+        <select [(ngModel)]="alquiler.estado" name="estado">
+          <option value="Activo">Activo</option>
+          <option value="Finalizado">Finalizado</option>
+          <option value="Cancelado">Cancelado</option>
+        </select>
+      </div>
+
+      <div class="botones">
+        <button type="submit" class="btn guardar">
+          {{ modoEditar ? 'Actualizar' : 'Guardar Alquiler' }}
+        </button>
+
+        <button type="button" class="btn cancelar" (click)="limpiarFormulario()">
+          Cancelar
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="tarjeta">
+    <div class="encabezado-lista">
+      <h2>Lista de Alquileres</h2>
+
+      <button type="button" class="btn actualizar" (click)="cargarDatos()">
+        Actualizar lista
+      </button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Vehículo</th>
+          <th>Inicio</th>
+          <th>Fin</th>
+          <th>Precio</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let a of alquileres">
+          <td>{{ a.alquilerId }}</td>
+
+          <td>
+            {{ a.cliente?.nombre }} {{ a.cliente?.apellido }}
+          </td>
+
+          <td>
+            {{ a.vehiculo?.marca }} {{ a.vehiculo?.modelo }}
+          </td>
+
+          <td>{{ a.fechaInicio | date:'yyyy-MM-dd' }}</td>
+          <td>{{ a.fechaFin | date:'yyyy-MM-dd' }}</td>
+          <td>$ {{ a.precioTotal }}</td>
+
+          <td>
+            <span 
+              [class.activo]="a.estado === 'Activo'" 
+              [class.finalizado]="a.estado === 'Finalizado'"
+              [class.cancelado]="a.estado === 'Cancelado'"
+            >
+              {{ a.estado }}
+            </span>
+          </td>
+
+          <td>
+            <button type="button" class="btn editar" (click)="editarAlquiler(a)">
+              Editar
+            </button>
+
+            <button 
+              type="button"
+              class="btn finalizar" 
+              *ngIf="a.estado === 'Activo'" 
+              (click)="finalizarAlquiler(a.alquilerId)">
+              Finalizar
+            </button>
+
+            <button type="button" class="btn eliminar" (click)="eliminarAlquiler(a.alquilerId)">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="alquileres.length === 0" class="vacio">
+      No hay alquileres registrados.
+    </p>
+  </div>
+</div>

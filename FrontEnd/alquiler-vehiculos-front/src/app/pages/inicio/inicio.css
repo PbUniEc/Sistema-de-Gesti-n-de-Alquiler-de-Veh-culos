@@ -1,0 +1,236 @@
+.inicio {
+  padding: 35px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 35%),
+    linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
+}
+
+.hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #2563eb 100%);
+  border-radius: 28px;
+  padding: 45px;
+  color: white;
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 30px;
+  align-items: center;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.25);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  right: -70px;
+  top: -70px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+.etiqueta {
+  display: inline-block;
+  background: rgba(14, 165, 233, 0.22);
+  color: #bae6fd;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: 45px;
+  line-height: 1.1;
+  margin: 0 0 18px;
+  max-width: 720px;
+}
+
+.hero p {
+  color: #dbeafe;
+  font-size: 18px;
+  max-width: 650px;
+  line-height: 1.6;
+}
+
+.acciones {
+  display: flex;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.acciones a {
+  text-decoration: none;
+  padding: 13px 18px;
+  border-radius: 14px;
+  font-weight: bold;
+}
+
+.btn-principal {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+.btn-secundario {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.hero-card {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 32px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 1;
+}
+
+.car-icon {
+  font-size: 75px;
+  margin-bottom: 10px;
+}
+
+.hero-card h3 {
+  font-size: 28px;
+  margin: 0;
+}
+
+.hero-card p {
+  margin: 8px 0 0;
+  font-size: 15px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 28px;
+}
+
+.card {
+  background: white;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.09);
+  border: 1px solid #e5e7eb;
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.14);
+}
+
+.icono {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  margin-bottom: 18px;
+}
+
+.azul {
+  background: #dbeafe;
+}
+
+.verde {
+  background: #dcfce7;
+}
+
+.naranja {
+  background: #ffedd5;
+}
+
+.card h3 {
+  font-size: 24px;
+  margin: 0 0 10px;
+  color: #0f172a;
+}
+
+.card p {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.card a {
+  display: inline-block;
+  margin-top: 12px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.resumen {
+  background: white;
+  border-radius: 24px;
+  padding: 30px;
+  margin-top: 28px;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.09);
+}
+
+.resumen h2 {
+  margin: 0 0 8px;
+  color: #0f172a;
+}
+
+.resumen p {
+  color: #64748b;
+}
+
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.paso {
+  background: #f8fafc;
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.paso span {
+  width: 36px;
+  height: 36px;
+  background: #2563eb;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.paso p {
+  margin: 0;
+  color: #0f172a;
+  font-weight: bold;
+}
+
+@media (max-width: 1000px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .cards,
+  .pasos {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+}

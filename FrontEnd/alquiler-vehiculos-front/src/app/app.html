@@ -1,0 +1,38 @@
+<div class="layout">
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">🚗</div>
+      <div>
+        <h2>RentCar</h2>
+        <p>Gestión de alquileres</p>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/inicio" routerLinkActive="activo">
+        <span>🏠</span> Inicio
+      </a>
+
+      <a routerLink="/vehiculos" routerLinkActive="activo">
+        <span>🚙</span> Vehículos
+      </a>
+
+      <a routerLink="/clientes" routerLinkActive="activo">
+        <span>👤</span> Clientes
+      </a>
+
+      <a routerLink="/alquileres" routerLinkActive="activo">
+        <span>📋</span> Alquileres
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>Sistema Administrativo</p>
+      <small>Versión 1.0</small>
+    </div>
+  </aside>
+
+  <main class="contenido">
+    <router-outlet></router-outlet>
+  </main>
+</div>

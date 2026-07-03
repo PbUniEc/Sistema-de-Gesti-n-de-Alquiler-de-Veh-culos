@@ -1,0 +1,111 @@
+<div class="contenedor">
+  <h1>Gestión de Vehículos</h1>
+
+  <div class="tarjeta formulario">
+    <h2>{{ modoEditar ? 'Editar Vehículo' : 'Registrar Vehículo' }}</h2>
+
+    <form (ngSubmit)="guardarVehiculo()">
+
+      <div class="grupo">
+        <label>Marca</label>
+        <input 
+          type="text" 
+          [(ngModel)]="vehiculo.marca" 
+          name="marca" 
+          placeholder="Ej: Toyota"
+        >
+      </div>
+
+      <div class="grupo">
+        <label>Modelo</label>
+        <input 
+          type="text" 
+          [(ngModel)]="vehiculo.modelo" 
+          name="modelo" 
+          placeholder="Ej: Corolla"
+        >
+      </div>
+
+      <div class="grupo">
+        <label>Año</label>
+        <input 
+          type="number" 
+          [(ngModel)]="vehiculo.anio" 
+          name="anio"
+        >
+      </div>
+
+      <div class="grupo check">
+        <label>
+          <input 
+            type="checkbox" 
+            [(ngModel)]="vehiculo.disponible" 
+            name="disponible"
+          >
+          Disponible
+        </label>
+      </div>
+
+      <div class="botones">
+        <button type="submit" class="btn guardar">
+          {{ modoEditar ? 'Actualizar' : 'Guardar' }}
+        </button>
+
+        <button type="button" class="btn cancelar" (click)="limpiarFormulario()">
+          Cancelar
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="tarjeta">
+    <div class="encabezado-lista">
+      <h2>Lista de Vehículos</h2>
+
+      <button type="button" class="btn actualizar" (click)="cargarVehiculos()">
+        Actualizar lista
+      </button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Año</th>
+          <th>Disponible</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let v of vehiculos">
+          <td>{{ v.vehiculoId }}</td>
+          <td>{{ v.marca }}</td>
+          <td>{{ v.modelo }}</td>
+          <td>{{ v.anio }}</td>
+          <td>
+            <span [class.disponible]="v.disponible" [class.ocupado]="!v.disponible">
+              {{ v.disponible ? 'Sí' : 'No' }}
+            </span>
+          </td>
+          <td>
+            <button type="button" class="btn editar" (click)="editarVehiculo(v)">
+              Editar
+            </button>
+
+            <button type="button" class="btn eliminar" (click)="eliminarVehiculo(v.vehiculoId)">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p *ngIf="vehiculos.length === 0" class="vacio">
+      No hay vehículos registrados.
+    </p>
+  </div>
+</div>
